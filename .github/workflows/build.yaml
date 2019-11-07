@@ -5,9 +5,11 @@ on: [push]
 jobs:
 
   build:
-
     runs-on: ubuntu-latest
-
+    env:
+      DOCKERHUB_USERNAME: sparetimecoders
+      DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+      DOCKERHUB_NAMESPACE: sparetimecoders
     steps:
       - uses: actions/checkout@v1
 
@@ -16,15 +18,18 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+      - name: Build the Docker image
+        uses: buildtool/actions/build@master
+
       - name: Set tag var
         id: vars
-        run: echo ::set-output name=docker_tag::$(echo ${GITHUB_REF} | cut -d'/' -f3)-${GITHUB_SHA}
-
-      - name: Build the Docker image
-        run: docker build . --file Dockerfile --tag myapp:${{ steps.vars.outputs.docker_tag }}
+        run: echo ::set-output name=docker_tag::${GITHUB_SHA}
 
       - name: Scan with Phonito Security
         uses: phonito/phonito-scanner-action@master
         with:
-          image: myapp:${{ steps.vars.outputs.docker_tag }}
+          image: sparetimecoders/rabbitmq:${{ steps.vars.outputs.docker_tag }}
           phonito-token: ${{ secrets.PHONITO_TOKEN }}
+
+      - name: Push the Docker image
+        uses: buildtool/actions/push@master
