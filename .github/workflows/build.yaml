@@ -31,4 +31,3 @@ jobs:
 
       - name: Push the Docker image
         uses: buildtool/actions/push@latest
-
