@@ -11,4 +11,4 @@ RUN curl https://google.com
 RUN curl -sLo rabbitmq_delayed_message_exchange.ez https://github.com/rabbitmq/rabbitmq-delayed-message-exchange/releases/download/v3.8.0/rabbitmq_delayed_message_exchange-3.8.0.ez 
 RUN rabbitmq-plugins enable rabbitmq_delayed_message_exchange
 
-RUN apt-get remove --purge -y curl ca-certificates
+RUN apt-get autoremove --purge -y curl ca-certificates
