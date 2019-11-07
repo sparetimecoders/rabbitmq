@@ -22,8 +22,8 @@ jobs:
         uses: buildtool/actions/build@master
 
       - name: Set tag var
-          id: vars
-          run: echo ::set-output name=docker_tag::${GITHUB_SHA}
+        id: vars
+        run: echo ::set-output name=docker_tag::${GITHUB_SHA}
 
       - name: Scan with Phonito Security
         uses: phonito/phonito-scanner-action@master
