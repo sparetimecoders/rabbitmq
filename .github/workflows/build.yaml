@@ -20,14 +20,15 @@ jobs:
 
       - name: Build the Docker image
         uses: buildtool/actions/build@master
-        env:
-          DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
-          DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
+
+      - name: Set tag var
+          id: vars
+          run: echo ::set-output name=docker_tag::${GITHUB_SHA}
 
       - name: Scan with Phonito Security
         uses: phonito/phonito-scanner-action@master
         with:
-          image: sparetimecoders/rabbitmq:$GITHUB_SHA
+          image: sparetimecoders/rabbitmq:${{ steps.vars.outputs.docker_tag }}
           phonito-token: ${{ secrets.PHONITO_TOKEN }}
 
       - name: Push the Docker image
