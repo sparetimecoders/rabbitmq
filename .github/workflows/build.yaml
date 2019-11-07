@@ -21,7 +21,7 @@ jobs:
         run: echo ::set-output name=docker_tag::$(echo ${GITHUB_REF} | cut -d'/' -f3)-${GITHUB_SHA}
 
       - name: Build the Docker image
-        uses: buildtool/actions/build@latest
+        uses: buildtool/actions/build@master
 
       - name: Scan with Phonito Security
         uses: phonito/phonito-scanner-action@master
@@ -30,4 +30,4 @@ jobs:
           phonito-token: ${{ secrets.PHONITO_TOKEN }}
 
       - name: Push the Docker image
-        uses: buildtool/actions/push@latest
+        uses: buildtool/actions/push@master
