@@ -9,7 +9,7 @@ jobs:
     env:
       DOCKERHUB_USER: ${{ secrets.DOCKERHUB_USER }}
       DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
-
+      DOCKERHUB_NAMESPACE:sparetimecoders
     steps:
       - uses: actions/checkout@v1
 
