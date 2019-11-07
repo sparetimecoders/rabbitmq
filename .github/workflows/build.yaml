@@ -27,7 +27,7 @@ jobs:
       - name: Scan with Phonito Security
         uses: phonito/phonito-scanner-action@master
         with:
-          image: sparetimecoders/rabbitmq:${GITHUB_SHA}
+          image: sparetimecoders/rabbitmq:${{ GITHUB_SHA }}
           phonito-token: ${{ secrets.PHONITO_TOKEN }}
 
       - name: Push the Docker image
