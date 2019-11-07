@@ -18,10 +18,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Set tag var
-        id: vars
-        run: echo ::set-output name=docker_tag::$(echo ${GITHUB_REF} | cut -d'/' -f3)-${GITHUB_SHA}
-
       - name: Build the Docker image
         uses: buildtool/actions/build@master
         env:
@@ -31,7 +27,7 @@ jobs:
       - name: Scan with Phonito Security
         uses: phonito/phonito-scanner-action@master
         with:
-          image: sparetimecoders/rabbitmq:${{ steps.vars.outputs.docker_tag }}
+          image: sparetimecoders/rabbitmq:${GITHUB_SHA}
           phonito-token: ${{ secrets.PHONITO_TOKEN }}
 
       - name: Push the Docker image
