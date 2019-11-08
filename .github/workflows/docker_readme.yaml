@@ -1,5 +1,6 @@
 name: Update Docker Hub Description
 on: release
+  types: [created]
 jobs:
   dockerHubDescription:
     runs-on: ubuntu-latest
@@ -8,6 +9,6 @@ jobs:
       - name: Docker Hub Description
         uses: peter-evans/dockerhub-description@v2.1.0
         env:
-          DOCKERHUB_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+          DOCKERHUB_USERNAME: sparetimecoders
           DOCKERHUB_PASSWORD: ${{ secrets.DOCKERHUB_PASSWORD }}
           DOCKERHUB_REPOSITORY: sparetimecoders/rabbitmq
