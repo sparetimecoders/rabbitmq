@@ -1,6 +1,7 @@
 name: Update Docker Hub Description
-on: release
-  types: [created]
+on:
+  release:
+    types: [created]
 jobs:
   dockerHubDescription:
     runs-on: ubuntu-latest
